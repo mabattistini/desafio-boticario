@@ -1,6 +1,7 @@
 import re
 
 from flask import Blueprint, json, request
+from flask_jwt import jwt_required
 
 from app.classes.revendedor import Revendedor
 from app.helpers.responses import responseError, responseSuccess
@@ -9,6 +10,7 @@ from app.models.revendedor import RevendedorModel
 revendedor_blueprint = Blueprint('revendedor_blueprint', __name__)
 
 @revendedor_blueprint.route(rule='/create', methods=['POST'])
+@jwt_required()
 def create():
     data = json.loads(request.data)
     cpf = re.sub('[^0-9]', '', data['cpf'])
@@ -23,6 +25,7 @@ def create():
     return responseSuccess("body", result)
 
 @revendedor_blueprint.route(rule='/login', methods=['POST'])
+@jwt_required()
 def login():
     data = json.loads(request.data)
     revendedor = Revendedor()
