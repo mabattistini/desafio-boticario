@@ -5,8 +5,9 @@ from app.helpers.criptografia import Cryptography
 
 
 def autenticate(username, password):
-    user = UserModel.query.filter_by(name=username).first()
-    if user and safe_str_cmp(user.password, Cryptography(None).sha224(password)):
+    user = UserModel.query.filter_by(username=username).first()
+    print(user)
+    if user and safe_str_cmp(user.password, Cryptography(None).sha224(password.encode())):
         return user
     else:
         return None

@@ -11,11 +11,11 @@ class Venda():
 
     def update(self, data):
         venda = VendaModel.find_by_id(data['id'])
-        venda.codigo = data['codigo']
-        venda.valor = data['valor']
-        venda.dataVenda = data['dataVenda']
-        venda.vendedor_id = data['vendedor']
-        venda.status = data['status']
+        if data['codigo'] is not None: venda.codigo = data['codigo']
+        if data['valor'] is not None:venda.valor = data['valor']
+        if data['dataVenda'] is not None:venda.dataVenda = data['dataVenda']
+        if data['vendedor'] is not None:venda.vendedor_id = data['vendedor']
+        if data['status'] is not None:venda.status = data['status']
         db.session.commit()
         return {"id": venda.id,
                 "codigo": venda.codigo,

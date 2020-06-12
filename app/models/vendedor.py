@@ -1,3 +1,5 @@
+import re
+
 from app.helpers.criptografia import Cryptography
 from app.models import db
 
@@ -15,7 +17,7 @@ class VendedorModel(db.Model):
     def __init__(self, email, nome, cpf, password):
         self.email = email
         self.nome = nome
-        self.cpf = cpf
+        self.cpf = re.sub('[^0-9]', '', cpf)
         self.password = Cryptography(None).sha224(password.encode())
 
     def json(self):

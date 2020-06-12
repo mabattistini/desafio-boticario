@@ -1,7 +1,8 @@
-def responseSuccess(field, data):
+def responseSuccess(field, data=[], message=None):
     response = dict()
     response['result'] = 'success'
-    response[field] = data
+    if len(data) > 0: response[field] = data
+    if message is not None: response['message'] = message
     return response
 
 

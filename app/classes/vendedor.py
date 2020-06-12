@@ -16,4 +16,4 @@ class Vendedor():
         if vendedor and safe_str_cmp(vendedor.password, Cryptography(None).sha224(password.encode())):
             return True, vendedor.json()
         else:
-            return False, {"message": "Email ou senha não conferem"}
+            return False, "Email ou senha não conferem"

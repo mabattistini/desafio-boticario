@@ -8,7 +8,8 @@ def main():
     html += '<html>'
     html += '<body>'
     html += '<h1>Webservice</h1>'
-    html += '<h3>Teste Boticario<br>'
+    html += '<h3>Teste Boticario</h3>'
+    html += '<a href="https://github.com/mabattistini/desafio-boticario/blob/master/README.md">Instruções</a>'
     html += '</body>'
     html += '</html>'
 
