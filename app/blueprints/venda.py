@@ -17,7 +17,7 @@ venda_blueprint = Blueprint('venda_blueprint', __name__)
 def create():
     data = json.loads(request.data)
 
-    cpf = re.sub('[^0-9]', '', data['cpf_'])
+    cpf = re.sub('[^0-9]', '', data['cpf_revendedor'])
     revendedor = RevendedorModel.find_by_cpf(cpf)
     if not revendedor:
         return responseError(f"revendedor com cpf {data['cpf_revendedor']} não cadastrado")
@@ -62,7 +62,7 @@ def update():
     venda = Venda()
     result = venda.update(data)
 
-    responseSuccess('body', result)
+    return responseSuccess('body', result)
 
 @venda_blueprint.route(rule='/delete', methods=['POST'])
 @jwt_required()
