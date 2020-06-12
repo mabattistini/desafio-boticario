@@ -5,7 +5,7 @@ PORT = 5000
 HOST = "0.0.0.0"
 SECRET_KEY = "o8-jEsz5fMEMY0hwIjwzfiuF0pYdvP0a0ckToSZuMtk="
 
-TIME_TOKEN_EXPIRATION = 10
+TIME_TOKEN_EXPIRATION = 10 # segudos
 
 DATABASE = os.path.dirname((__file__)) + os.path.sep + 'boticario.db'
 
