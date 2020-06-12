@@ -8,7 +8,7 @@ from app.classes.apiboticario import ApiBoticario
 from app.classes.venda import Venda
 from app.helpers.responses import responseSuccess, responseError
 from app.models.venda import VendaModel
-from app.models.vendedor import VendedorModel
+from app.models.revendedor import RevendedorModel
 
 venda_blueprint = Blueprint('venda_blueprint', __name__)
 
@@ -17,20 +17,20 @@ venda_blueprint = Blueprint('venda_blueprint', __name__)
 def create():
     data = json.loads(request.data)
 
-    cpf = re.sub('[^0-9]', '', data['cpf_vendedor'])
-    vendedor = VendedorModel.find_by_cpf(cpf)
-    if not vendedor:
-        return responseError(f"Vendedor com cpf {data['cpf_vendedor']} não cadastrado")
+    cpf = re.sub('[^0-9]', '', data['cpf_'])
+    revendedor = RevendedorModel.find_by_cpf(cpf)
+    if not revendedor:
+        return responseError(f"revendedor com cpf {data['cpf_revendedor']} não cadastrado")
 
-    data['status'] = "Em validação" if vendedor.cpf != "15350946056" else "Aprovado"
+    data['status'] = "Em validação" if revendedor.cpf != "15350946056" else "Aprovado"
 
     try:
         data['dataVenda'] = datetime.strptime(data['dataVenda'], '%d/%m/%Y')
     except:
         return responseError(f"A data {data['dataVenda']} é inválida")
 
-    data['vendedor'] = vendedor.id
-    del data['cpf_vendedor']
+    data['revendedor'] = revendedor.id
+    del data['cpf_revendedor']
 
     venda = Venda()
 
@@ -48,12 +48,12 @@ def update():
     if venda.status != "Em validação":
         return responseError(f"Venda não pode ser alterada, status = {venda.status}")
 
-    cpf = re.sub('[^0-9]', '', data['cpf_vendedor'])
-    vendedor = VendedorModel.find_by_cpf(cpf)
-    if not vendedor:
-        return responseError(f"message: Vendedor com cpf {data['cpf_vendedor']} não cadastrado")
+    cpf = re.sub('[^0-9]', '', data['cpf_revendedor'])
+    revendedor = RevendedorModel.find_by_cpf(cpf)
+    if not revendedor:
+        return responseError(f"message: revendedor com cpf {data['cpf_revendedor']} não cadastrado")
 
-    data['vendedor'] = vendedor.id
+    data['revendedor'] = revendedor.id
     try:
         data['dataVenda'] = datetime.strptime(data['dataVenda'], '%d/%m/%Y')
     except:
@@ -88,7 +88,7 @@ def list():
     vendas = VendaModel.listAll()
     for venda in vendas:
         vendaJson = venda.json()
-        cpf = re.sub('[^0-9]', '', venda.vendedor.cpf)
+        cpf = re.sub('[^0-9]', '', venda.revendedor.cpf)
         credit = ApiBoticario.get(cpf=cpf)
         try:
             percent = round(((venda.valor / credit) * 100), 2)
@@ -108,7 +108,7 @@ def listCashBack():
 
     vendas = VendaModel.listAll()
     for venda in vendas:
-        cpf = re.sub('[^0-9]', '', venda.vendedor.cpf)
+        cpf = re.sub('[^0-9]', '', venda.revendedor.cpf)
         credit = ApiBoticario.get(cpf=cpf)
         totalCashback += credit
 

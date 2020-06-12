@@ -14,13 +14,13 @@ class Venda():
         if data['codigo'] is not None: venda.codigo = data['codigo']
         if data['valor'] is not None:venda.valor = data['valor']
         if data['dataVenda'] is not None:venda.dataVenda = data['dataVenda']
-        if data['vendedor'] is not None:venda.vendedor_id = data['vendedor']
+        if data['revendedor'] is not None:venda.revendedor_id = data['revendedor']
         if data['status'] is not None:venda.status = data['status']
         db.session.commit()
         return {"id": venda.id,
                 "codigo": venda.codigo,
                 "valor": venda.valor,
                 "data_venda": venda.dataVenda,
-                "vendedor_id": venda.vendedor_id,
-                "vendedor": venda.vendedor.nome,
+                "revendedor_id": venda.revendedor_id,
+                "revendedor": venda.revendedor.nome,
                 "status": venda.status}

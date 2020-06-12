@@ -17,8 +17,8 @@ host = f"http://127.0.0.1:{PORT}"
 
 urls = {
     "auth": host + "/auth",
-    "cadastrar_vendedor": host + "/vendedor/create",
-    "login_vendedor": host + "/vendedor/login",
+    "cadastrar_revendedor": host + "/revendedor/create",
+    "login_revendedor": host + "/revendedor/login",
     "cadastrar_venda": host + "/venda/create",
     "alterar_venda": host + "/venda/edit",
     "excluir_venda": host + "/venda/delete",

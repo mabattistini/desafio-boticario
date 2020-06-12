@@ -1,5 +1,4 @@
 from app.models import db
-from app.models.vendedor import VendedorModel
 
 
 class VendaModel(db.Model):
@@ -9,15 +8,15 @@ class VendaModel(db.Model):
     codigo = db.Column(db.String(50), nullable=False)
     valor = db.Column(db.Float, nullable=False)
     dataVenda = db.Column(db.Date, nullable=False)
-    vendedor_id = db.Column(db.Integer, db.ForeignKey('vendedores.id'), nullable=False)
+    revendedor_id = db.Column(db.Integer, db.ForeignKey('revendedores.id'), nullable=False)
     status = db.Column(db.String(10), nullable=True)
-    vendedor = db.relationship('VendedorModel')
+    revendedor = db.relationship('RevendedorModel')
 
-    def __init__(self, codigo, valor, dataVenda, vendedor, status):
+    def __init__(self, codigo, valor, dataVenda, revendedor, status):
         self.codigo = codigo
         self.valor = valor
         self.dataVenda = dataVenda
-        self.vendedor_id = vendedor
+        self.revendedor_id = revendedor
         self.status = status
 
     def json(self):
@@ -25,8 +24,8 @@ class VendaModel(db.Model):
                 "codigo": self.codigo,
                 "valor": self.valor,
                 "data_venda": self.dataVenda,
-                "vendedor_id": self.vendedor_id,
-                "vendedor": self.vendedor.nome,
+                "revendedor_id": self.revendedor_id,
+                "revendedor": self.revendedor.nome,
                 "status": self.status}
 
     def save_to_db(self):

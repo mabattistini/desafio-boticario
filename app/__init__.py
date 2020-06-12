@@ -39,12 +39,12 @@ def create_app(config_filename):
         return response
 
     from app.blueprints.main import main_blueprint
-    from app.blueprints.vendedor import vendedor_blueprint
+    from app.blueprints.revendedor import revendedor_blueprint
     from app.blueprints.venda import venda_blueprint
 
 
     app.register_blueprint(blueprint=main_blueprint, url_prefix="/")
-    app.register_blueprint(blueprint=vendedor_blueprint, url_prefix="/vendedor")
+    app.register_blueprint(blueprint=revendedor_blueprint, url_prefix="/revendedor")
     app.register_blueprint(blueprint=venda_blueprint, url_prefix="/venda")
 
 

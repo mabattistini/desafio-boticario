@@ -4,8 +4,8 @@ from app.helpers.criptografia import Cryptography
 from app.models import db
 
 
-class VendedorModel(db.Model):
-    __tablename__ = 'vendedores'
+class RevendedorModel(db.Model):
+    __tablename__ = 'revendedores'
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
